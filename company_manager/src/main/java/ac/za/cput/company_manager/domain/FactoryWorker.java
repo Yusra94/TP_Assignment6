@@ -1,10 +1,95 @@
 package ac.za.cput.company_manager.domain;
 
-/**
- * /**
- * Author: Braedy Thebus (213039168)
- * Email: Bthebus2@gmail.com
- * Date Created:2015/04/17.
- */
-public class FactoryWorker {
+import java.io.Serializable;
+
+public class FactoryWorker implements Serializable{
+
+    private String employeeID;
+    private String employeeName;
+    private String employeeSurname;
+    private String hireDate;
+    private double salary;
+
+    public FactoryWorker() {
+    }
+
+    public FactoryWorker(Builder builder) {
+        this.employeeID = builder.employeeID;
+        this.employeeName = builder.employeeName;
+        this.employeeSurname = builder.employeeSurname;
+        this.hireDate = builder.hireDate;
+        this.salary = builder.employeeSalary;
+    }
+
+    public String getEmployeeID() {
+        return employeeID;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public String getEmployeeSurname(){return  employeeSurname;}
+
+    public String getHireDate() {
+        return hireDate;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public static class Builder
+    {
+        private String employeeID;
+        private String employeeName;
+        private String employeeSurname;
+        private String hireDate;
+        private double employeeSalary;
+
+        public Builder(String id) {
+
+            this.employeeID = id;
+        }
+
+        public Builder employeeSurname(String surname)
+        {
+            this.employeeSurname = surname;
+            return this;
+        }
+
+        public Builder employeeName(String name)
+        {
+            this.employeeName = name;
+            return this;
+        }
+
+        public Builder employeeHireDate(String hireDate)
+        {
+            this.hireDate = hireDate;
+            return this;
+        }
+
+        public Builder employeeSalary(double salary)
+        {
+            this.employeeSalary = salary;
+            return this;
+        }
+
+
+        public Builder copy(FactoryWorker value)
+        {
+            this.employeeID = value.employeeID;
+            this.employeeName = value.employeeName;
+            this.employeeSurname = value.employeeSurname;
+            this.employeeSalary = value.salary;
+            this.hireDate = value.hireDate;
+            return this;
+        }
+
+        public FactoryWorker build()
+        {
+            return new FactoryWorker(this);
+        }
+    }
 }
