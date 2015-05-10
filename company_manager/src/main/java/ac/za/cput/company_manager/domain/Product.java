@@ -1,21 +1,24 @@
 package ac.za.cput.company_manager.domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by student on 2015/04/25.
- */
+@Entity
 public class Product implements Serializable{
 
-    private String productNumber;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long productNumber;
     private String productName;
     private int qty;
     private double sellingPrice;
     private double cost;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name="product_materials")
     private List<RawMaterial> rawMaterialList;
 
-    public Product() {
+    protected Product() {
     }
 
     public Product(Builder builder) {
@@ -39,7 +42,7 @@ public class Product implements Serializable{
         return cost;
     }
 
-    public String getProductNumber() {
+    public long getProductNumber() {
         return productNumber;
     }
 
@@ -51,21 +54,23 @@ public class Product implements Serializable{
 
     public static class Builder
     {
-        private String productNumber;
+        private long productNumber;
         private String productName;
         private double sellingPrice;
         private double cost;
         private int qty;
         private List<RawMaterial> rawMaterialList;
 
-        public Builder(String value)
-        {
-            this.productNumber = value;
-        }
 
-        public Builder productName(String value)
+        public Builder (String value)
         {
             this.productName = value;
+
+        }
+
+        public Builder productNumber(long value)
+        {
+            this.productNumber = value;
             return this;
         }
 

@@ -1,5 +1,6 @@
 package ac.za.cput.company_manager.Domain;
 
+import ac.za.cput.company_manager.Factory.SupplierFactory;
 import ac.za.cput.company_manager.domain.RawMaterial;
 import ac.za.cput.company_manager.domain.Supplier;
 import org.junit.Assert;
@@ -22,15 +23,10 @@ public class SupplierTest {
     public void setUp() throws Exception {
 
         rawMaterialList = new ArrayList<RawMaterial>();
-        rawMaterial = new RawMaterial.Builder("56").rawMaterialName("rawMaterial1").rawMaterialQtyOnHand(5).rawMatrialCost(150.00).build();
+        rawMaterial = new RawMaterial.Builder("rawMaterial1").rawMaterialQtyOnHand(5).rawMatrialCost(150.00).build();
         rawMaterialList.add(rawMaterial);
-        supplier = new Supplier.Builder("12345").supplierName("Sunlight").supplierAddress("Kengsington").supplierEmail("sunlight@gmail.com").supplierPhoneNumber("0219523654").rawMaterialList(rawMaterialList).build();
-    }
-
-    @Test
-    public void testSupplierId() throws Exception {
-
-        Assert.assertEquals("12345", supplier.getSupplierId());
+       // supplier = new Supplier.Builder(12345).supplierName("Sunlight").supplierAddress("Kengsington").supplierEmail("sunlight@gmail.com").supplierPhoneNumber("0219523654").rawMaterialList(rawMaterialList).build();
+        supplier = SupplierFactory.createSupplier("Sunlight", "Kengsington","sunlight@gmail.com", "0219523654",rawMaterialList);
     }
 
     @Test

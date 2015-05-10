@@ -1,7 +1,8 @@
 package ac.za.cput.company_manager.Domain;
 
+import ac.za.cput.company_manager.Factory.CustomerFactory;
 import ac.za.cput.company_manager.domain.Customer;
-import ac.za.cput.company_manager.domain.Order;
+import ac.za.cput.company_manager.domain.Orders;
 import ac.za.cput.company_manager.domain.Product;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,70 +17,65 @@ import java.util.List;
 public class CustomerTest {
 
     Customer customer;
-    Order order;
-    List<Order> ordersList;
+    Orders orders;
+    List<Orders> ordersList;
     List<Product> productList;
     List<Product> productList1;
-    List<Order> ordersList1;
+    List<Orders> ordersList1;
     Customer customer2;
-    Order order1;
+    Orders orders1;
 
 
     @Before
     public void setUp() throws Exception {
 
         productList = new ArrayList<Product>();
-        productList.add(new Product.Builder("001").productName("Chlorine").itemQty(5).productCost(50.00).productSellingPrice(80.00).build());
-        productList.add(new Product.Builder("002").productName("Dishwasher").itemQty(3).productCost(22.00).productSellingPrice(36.00).build());
+        productList.add(new Product.Builder("Chlorine").itemQty(5).productCost(50.00).productSellingPrice(80.00).build());
+        productList.add(new Product.Builder("Dishwasher").itemQty(3).productCost(22.00).productSellingPrice(36.00).build());
 
-        order = new Order.Builder("255").orderDate("15-2-2014").totalSales(300.00).productList(productList).build();
-        ordersList = new ArrayList<Order>();
-        ordersList.add(order);
+        orders = new Orders.Builder("15-2-2014").totalSales(300.00).productList(productList).build();
+        ordersList = new ArrayList<Orders>();
+        ordersList.add(orders);
 
-        customer = new Customer.Builder("12345").customerName("Harry").customerSurname("Potter").customerAddress("Hogwarts").emailAddress("HarryP@yahoo.com").phoneNumber("55512345").orderList(ordersList).build();
+        customer = CustomerFactory.createCustomer("Yusra", "Ismail", "22 Leeubekkie", "0768954126","yusraismail17@gmail.com", ordersList);
+        //customer = new Customer.Builder(12345).customerName("Harry").customerSurname("Potter").customerAddress("Hogwarts").emailAddress("HarryP@yahoo.com").phoneNumber("55512345").orderList(ordersList).build();
 
-    }
-
-    @Test
-    public void testCustomerId() throws Exception {
-
-        Assert.assertEquals("12345", customer.getCustomerID());
     }
 
     @Test
     public void testCustomerName() throws Exception {
 
-        Assert.assertEquals("Harry", customer.getCustomerName());
+        Assert.assertEquals("Yusra", customer.getCustomerName());
     }
 
     @Test
     public void testCustomerSurname() throws Exception {
 
-        Assert.assertEquals("Potter", customer.getCustomerSurname());
+        Assert.assertEquals("Ismail", customer.getCustomerSurname());
     }
 
     @Test
     public void testCustomerAddress() throws Exception {
 
-        Assert.assertEquals("Hogwarts", customer.getCustomerAddress());
+        Assert.assertEquals("22 Leeubekkie", customer.getCustomerAddress());
     }
 
     @Test
     public void testCustomerEmail() throws Exception {
 
-        Assert.assertEquals("HarryP@yahoo.com", customer.getCutomerEmailAddress());
+        Assert.assertEquals("yusraismail17@gmail.com", customer.getCutomerEmailAddress());
     }
 
     @Test
     public void testCustomerPhone() throws Exception {
 
-        Assert.assertEquals("55512345", customer.getCustomerPhoneNumber());
+        Assert.assertEquals("0768954126", customer.getCustomerPhoneNumber());
     }
 
     @Test
     public void testCustomerOrdersList() throws Exception {
 
-        Assert.assertEquals(ordersList, customer.getOrders());
+        Assert.assertEquals(ordersList, customer.getOrderses());
 
     }
 }

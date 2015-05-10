@@ -2,7 +2,7 @@ package ac.za.cput.company_manager.domain;
 
 public interface Employee {
 
-    public String getEmployeeId();
+    public long getEmployeeId();
     public String getEmployeeName();
     public String getEmployeeSurname();
     public String getEmployeeAddress();

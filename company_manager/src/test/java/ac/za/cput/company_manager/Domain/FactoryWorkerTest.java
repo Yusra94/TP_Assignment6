@@ -15,13 +15,7 @@ public class FactoryWorkerTest {
     @Before
     public void setUp() throws Exception {
 
-        factoryWorker = new FactoryWorker.Builder("12345").employeeName("Gammatjie").employeeSurname("Abdul").employeeSalary(8000.00).employeeHireDate("18-12-2014").build();
-    }
-
-    @Test
-    public void testFactoryWorkerId() throws Exception {
-
-        Assert.assertEquals("12345", factoryWorker.getEmployeeID());
+        factoryWorker = new FactoryWorker.Builder(12345).employeeName("Gammatjie").employeeSurname("Abdul").employeeSalary(8000.00).employeeHireDate("18-12-2014").build();
     }
 
     @Test

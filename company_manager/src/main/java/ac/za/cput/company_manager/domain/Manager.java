@@ -1,10 +1,17 @@
 package ac.za.cput.company_manager.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
+@Entity
 public class Manager implements Serializable{
 
-    private String managerId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long managerId;
     private String managerName;
     private String managerSurname;
 
@@ -17,7 +24,7 @@ public class Manager implements Serializable{
         this.managerSurname = builder.managerSurname;
     }
 
-    public String getManagerId() {
+    public long getManagerId() {
         return managerId;
     }
 
@@ -32,11 +39,11 @@ public class Manager implements Serializable{
     public static class Builder
     {
 
-        private String managerId;
+        private long managerId;
         private String managerName;
         private String managerSurname;
 
-        public Builder(String id) {
+        public Builder(long id) {
 
             this.managerId = id;
         }

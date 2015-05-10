@@ -1,17 +1,16 @@
 package ac.za.cput.company_manager.Domain;
 
+import ac.za.cput.company_manager.Factory.ProductFactory;
 import ac.za.cput.company_manager.domain.Product;
 import ac.za.cput.company_manager.domain.RawMaterial;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by student on 2015/04/25.
- */
 public class ProductTest {
 
     List<RawMaterial> rawMaterialList;
@@ -21,22 +20,16 @@ public class ProductTest {
     @Before
     public void setUp() throws Exception {
         rawMaterialList = new ArrayList<RawMaterial>();
-        rawMaterial = new RawMaterial.Builder("300").rawMaterialName("rawMaterial1").rawMaterialQtyOnHand(15).rawMatrialCost(185.00).build();
+        rawMaterial = new RawMaterial.Builder("rawMaterial1").rawMaterialQtyOnHand(15).rawMatrialCost(185.00).build();
         rawMaterialList.add(rawMaterial);
-        product = new Product.Builder("128").productName("product1").itemQty(5).productCost(328.00).productSellingPrice(500.00).rawMaterialist(rawMaterialList).build();
-
-    }
-
-    @Test
-    public void testProductNumber() throws Exception {
-
-        Assert.assertEquals("128", product.getProductNumber());
+        //product = new Product.Builder(128).productName("product1").itemQty(5).productCost(328.00).productSellingPrice(500.00).rawMaterialist(rawMaterialList).build();
+        product = ProductFactory.createProduct("Bleach",5,500,328, rawMaterialList);
     }
 
     @Test
     public void testProductName() throws Exception {
 
-        Assert.assertEquals("product1", product.getProductName());
+        Assert.assertEquals("Bleach", product.getProductName());
     }
 
     @Test

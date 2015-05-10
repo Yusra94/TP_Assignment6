@@ -1,16 +1,20 @@
 package ac.za.cput.company_manager.domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+@Entity
 public class RawMaterial implements Serializable{
 
-    private String rawMaterialId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long rawMaterialId;
     private String rawMaterialName;
     private double rawMaterialCost;
     private int rawMaterialQtyOnHand;
 
-    public RawMaterial() {
+    protected RawMaterial() {
     }
 
     public RawMaterial(Builder builder) {
@@ -20,7 +24,7 @@ public class RawMaterial implements Serializable{
         this.rawMaterialQtyOnHand = builder.rawMaterialQtyOnHand;
     }
 
-    public String getRawMaterialId() {
+    public long getRawMaterialId() {
         return rawMaterialId;
     }
 
@@ -37,19 +41,19 @@ public class RawMaterial implements Serializable{
     }
 
     public static class Builder {
-        private String rawMaterialId;
+        private long rawMaterialId;
         private String rawMaterialName;
         private double rawMaterialCost;
         private int rawMaterialQtyOnHand;
 
-        public Builder(String id) {
+        /*public Builder(long id) {
             this.rawMaterialId = id;
 
-        }
+        }*/
 
-        public Builder rawMaterialName(String name) {
+        public Builder (String name) {
             this.rawMaterialName = name;
-            return this;
+
         }
 
         public Builder rawMatrialCost(double cost) {

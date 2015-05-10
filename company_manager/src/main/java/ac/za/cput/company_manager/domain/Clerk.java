@@ -2,12 +2,17 @@ package ac.za.cput.company_manager.domain;
 
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
 public class Clerk implements Employee,Serializable{
 
-    String employeeId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    long employeeId;
     String employeeName;
     String employeeSurname;
     String employeeAddress;
@@ -30,7 +35,7 @@ public class Clerk implements Employee,Serializable{
         this.hireDate = builder.hireDate;
     }
 
-    public String getEmployeeId() {
+    public long getEmployeeId() {
         return this.employeeId;
     }
 
@@ -65,7 +70,7 @@ public class Clerk implements Employee,Serializable{
 
     public static class Builder
     {
-        String employeeId;
+        long employeeId;
         String employeeName;
         String employeeSurname;
         String employeeAddress;
@@ -74,7 +79,7 @@ public class Clerk implements Employee,Serializable{
         double employeeSalary;
         String hireDate;
 
-        public Builder(String employeeId)
+        public Builder(long employeeId)
         {
             this.employeeId = employeeId;
         }

@@ -1,20 +1,28 @@
 package ac.za.cput.company_manager.domain;
 
+
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+@Entity
 public class Customer implements Serializable{
 
-    private String customerID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long customerID;
     private String customerName;
     private String customerSurname;
     private String customerAddress;
     private String CustomerPhoneNumber;
-    private String cutomerEmailAddress;
-    private List<Order> orders;
+    private String customerEmailAddress;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name="order_customerID")
+    private List<Orders> orderses;
 
-    public Customer() {
-    }
+    public Customer()
+    {}
 
     public Customer(Builder builder) {
         this.customerID = builder.customerID;
@@ -22,11 +30,11 @@ public class Customer implements Serializable{
         this.customerSurname = builder.customerSurname;
         this.customerAddress = builder.customerAddress;
         this.CustomerPhoneNumber = builder.customerPhoneNumber;
-        this.cutomerEmailAddress = builder.customerEmailAddress;
-        this.orders = builder.orders;
+        this.customerEmailAddress = builder.customerEmailAddress;
+        this.orderses = builder.orderses;
     }
 
-    public String getCustomerID() {
+    public Long getCustomerID() {
         return customerID;
     }
 
@@ -47,31 +55,31 @@ public class Customer implements Serializable{
     }
 
     public String getCutomerEmailAddress() {
-        return cutomerEmailAddress;
+        return customerEmailAddress;
     }
 
-    public  List<Order> getOrders(){return orders;}
+    public  List<Orders> getOrderses(){return orderses;}
 
     public static class Builder
     {
-        private String customerID;
+        private Long customerID;
         private String customerName;
         private String customerSurname;
         private String customerAddress;
         private String customerPhoneNumber;
         private String customerEmailAddress;
-        private List<Order> orders;
+        private List<Orders> orderses;
 
-        public Builder(String customerID)
+        public Builder(String name)
         {
-            this.customerID = customerID;
+            this.customerName = name;
         }
 
-        public Builder customerName(String name){
+       /* public Builder customerName(String name){
 
             this.customerName = name;
             return this;
-        }
+        }*/
         public Builder customerSurname(String surname){
 
             this.customerSurname = surname;
@@ -96,9 +104,9 @@ public class Customer implements Serializable{
             return this;
         }
 
-        public Builder orderList(List<Order> value)
+        public Builder orderList(List<Orders> value)
         {
-            this.orders = value;
+            this.orderses = value;
             return this;
         }
 
@@ -107,9 +115,9 @@ public class Customer implements Serializable{
             this.customerID = value.customerID;
             this.customerName = value.customerName;
             this.customerAddress = value.customerAddress;
-            this.customerEmailAddress = value.cutomerEmailAddress;
+            this.customerEmailAddress = value.customerEmailAddress;
             this.customerPhoneNumber = value.CustomerPhoneNumber;
-            this.orders = value.orders;
+            this.orderses = value.orderses;
             return this;
         }
 
@@ -119,5 +127,29 @@ public class Customer implements Serializable{
         }
 
 
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Customer customer = (Customer) o;
+
+        return customerID.equals(customer.customerID);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return customerID.hashCode();
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Name: " + customerName + "" + "Surname: " + customerSurname;
     }
 }

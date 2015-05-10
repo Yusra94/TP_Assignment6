@@ -15,13 +15,7 @@ public class ClerkTest {
     @Before
     public void setUp() throws Exception {
 
-        clerk = new Clerk.Builder("12345").employeeName("Yusra").employeeSurname("Ismail").employeeAddress("Lentegeur, Mitchells Plain").employeePhoneNumber("0768954126").employeeEmail("yusraismail17@gmail.com").employeeSalary(12000).hireDate("23-03-2010").build();
-
-    }
-
-    @Test
-    public void testEmployeeId() throws Exception {
-        Assert.assertEquals("12345", clerk.getEmployeeId());
+        clerk = new Clerk.Builder(12345).employeeName("Yusra").employeeSurname("Ismail").employeeAddress("Lentegeur, Mitchells Plain").employeePhoneNumber("0768954126").employeeEmail("yusraismail17@gmail.com").employeeSalary(12000).hireDate("23-03-2010").build();
 
 
     }

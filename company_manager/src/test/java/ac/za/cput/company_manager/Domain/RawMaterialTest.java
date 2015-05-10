@@ -1,27 +1,21 @@
 package ac.za.cput.company_manager.Domain;
 
+import ac.za.cput.company_manager.Factory.RawMaterialFactory;
 import ac.za.cput.company_manager.domain.RawMaterial;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Created by student on 2015/04/24.
- */
 public class RawMaterialTest {
 
     RawMaterial rawMaterial;
 
     @Before
     public void setUp() throws Exception {
-        rawMaterial = new RawMaterial.Builder("99").rawMaterialName("Chloro").rawMaterialQtyOnHand(8).rawMatrialCost(105.50).build();
+        //rawMaterial = new RawMaterial.Builder(99).rawMaterialName("Chloro").rawMaterialQtyOnHand(8).rawMatrialCost(105.50).build();
+        rawMaterial = RawMaterialFactory.createRawMaterial("Chloro",105.50,8);
     }
 
-    @Test
-    public void testId() throws Exception {
-
-        Assert.assertEquals("99",rawMaterial.getRawMaterialId());
-    }
 
     @Test
     public void testName() throws Exception {

@@ -26,5 +26,8 @@
         <module name="company_manager" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="company_manager" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

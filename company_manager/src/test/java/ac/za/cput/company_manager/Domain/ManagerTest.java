@@ -15,14 +15,10 @@ public class ManagerTest {
     @Before
     public void setUp() throws Exception {
 
-        manager = new Manager.Builder("12345").managerName("Cuan").managerSurname("Lee").build();
+        manager = new Manager.Builder(12345).managerName("Cuan").managerSurname("Lee").build();
     }
 
-    @Test
-    public void testManagerId() throws Exception {
 
-        Assert.assertEquals("12345",manager.getManagerId());
-    }
 
     @Test
     public void testManagerName() throws Exception {

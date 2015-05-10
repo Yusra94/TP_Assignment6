@@ -1,15 +1,21 @@
 package ac.za.cput.company_manager.domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+@Entity
 public class Supplier implements Serializable{
 
-    private String supplierId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long supplierId;
     private String supplierName;
     private String supplierPhoneNumber;
     private String supplierEmail;
     private String supplierAddress;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name="supplier_material")
     private List<RawMaterial> rawMaterialList;
 
     public Supplier() {
@@ -24,7 +30,7 @@ public class Supplier implements Serializable{
         this.rawMaterialList = builder.rawMaterialList;
     }
 
-    public String getSupplierId() {
+    public long getSupplierId() {
         return supplierId;
     }
 
@@ -48,21 +54,21 @@ public class Supplier implements Serializable{
 
     public static class Builder
     {
-        private String supplierId;
+        private long supplierId;
         private String supplierName;
         private String supplierPhoneNumber;
         private String supplierEmail;
         private String supplierAddress;
         private List<RawMaterial> rawMaterialList;
 
-        public Builder(String id)
-        {
-            this.supplierId = id;
-        }
-
-        public Builder supplierName(String name)
+        public Builder(String name)
         {
             this.supplierName = name;
+
+        }
+        public Builder supplierId(long id)
+        {
+            this.supplierId = id;
             return this;
         }
 

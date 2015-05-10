@@ -1,10 +1,18 @@
 package ac.za.cput.company_manager.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
+
+@Entity
 public class FactoryWorker implements Serializable{
 
-    private String employeeID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long employeeID;
     private String employeeName;
     private String employeeSurname;
     private String hireDate;
@@ -21,7 +29,7 @@ public class FactoryWorker implements Serializable{
         this.salary = builder.employeeSalary;
     }
 
-    public String getEmployeeID() {
+    public long getEmployeeID() {
         return employeeID;
     }
 
@@ -41,13 +49,13 @@ public class FactoryWorker implements Serializable{
 
     public static class Builder
     {
-        private String employeeID;
+        private long employeeID;
         private String employeeName;
         private String employeeSurname;
         private String hireDate;
         private double employeeSalary;
 
-        public Builder(String id) {
+        public Builder(long id) {
 
             this.employeeID = id;
         }
